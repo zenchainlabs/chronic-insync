@@ -252,7 +252,7 @@ class NavBar extends Component {
                     alt="OmniFlix"
                     src={logo}
                     style={{ cursor: 'pointer' }}
-                    onClick={() => window.open('https://omniflix.co', '_self')}/>
+                    onClick={() => window.open('https://chronicchain.io', '_self')}/>
                 <ExpansionButton/>
                 <div className={ClassNames('right_content', this.props.show ? 'show' : '')}>
                     <div className="back_button" onClick={this.props.handleClose}>
