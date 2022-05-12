@@ -10,7 +10,6 @@ const coinDenom = config.COIN_DENOM;
 const coinMinimalDenom = config.COIN_MINIMAL_DENOM;
 const coinDecimals = config.COIN_DECIMALS;
 const prefix = config.PREFIX;
-const coinGeckoId = config.COINGECKO_ID;
 
 const chainConfig = {
     chainId: chainId,
@@ -18,10 +17,10 @@ const chainConfig = {
     rpc: RPC_URL,
     rest: REST_URL,
     stakeCurrency: {
-        coinDenom,
-        coinMinimalDenom,
+        coinDenom: 'CHT',
+        coinMinimalDenom: 'ucht',
         coinDecimals,
-        coinGeckoId,
+        coinGeckoId: config.COINGECKO_ID,
     },
     bip44: {
         coinType: 118,
@@ -39,15 +38,15 @@ const chainConfig = {
             coinDenom,
             coinMinimalDenom,
             coinDecimals,
-            coinGeckoId,
+            coinGeckoId: config.COINGECKO_ID,
         },
     ],
     feeCurrencies: [
         {
-            coinDenom,
-            coinMinimalDenom,
+            coinDenom: 'CGAS',
+            coinMinimalDenom: 'ucgas',
             coinDecimals,
-            coinGeckoId,
+            coinGeckoId: config.COINGECKO_ID,
         },
     ],
     coinType: config.COIN_TYPE,
@@ -68,7 +67,53 @@ export const initializeChain = (cb) => {
         } else {
             if (window.keplr.experimentalSuggestChain) {
                 try {
-                    await window.keplr.experimentalSuggestChain(chainConfig);
+                    await window.keplr.experimentalSuggestChain({
+                   rpc: "https://rpc-chronic.zenchainlabs.io/",
+    rest: "https://api-chronic.zenchainlabs.io/",
+    chainId: "morocco-1",
+    chainName: "Chronic-Token",
+    stakeCurrency: {
+      coinDenom: "CHT",
+      coinMinimalDenom: "ucht",
+      coinDecimals: 6,
+    },
+    bip44: {
+      coinType: 118,
+    },
+     "bech32Config": {
+        "bech32PrefixAccAddr": "chronic",
+        "bech32PrefixAccPub": "chronicpub",
+        "bech32PrefixValAddr": "chronicvaloper",
+        "bech32PrefixValPub": "chronicvaloperpub",
+        "bech32PrefixConsAddr": "chronicvalcons",
+        "bech32PrefixConsPub": "chronicvalconspub"
+    },
+    currencies: [
+      {
+        coinDenom: "CHT",
+        coinMinimalDenom: "ucht",
+        coinDecimals: 6,
+      },
+      {
+        coinDenom: "CGAS",
+        coinMinimalDenom: "ucgas",
+        coinDecimals: 6,
+      },
+    ],
+    feeCurrencies: [
+      {
+        coinDenom: "CGAS",
+        coinMinimalDenom: "ucgas",
+        coinDecimals: 6,
+      },
+    ],
+    gasPriceStep: {
+      low: 0.001,
+      average: 0.0025,
+      high: 0.003,
+    },
+    features: ["ibc-go"],
+   });
                 } catch (error) {
                     const chainError = 'Failed to suggest the chain';
                     cb(chainError);
@@ -165,7 +210,6 @@ export const aminoSignTxAndBroadcast = (tx, address, cb) => {
             account.accountNumber = 0;
             account.sequence = 0;
         }
-
         const signDoc = makeSignDoc(
             tx.msgs ? tx.msgs : [tx.msg],
             tx.fee,

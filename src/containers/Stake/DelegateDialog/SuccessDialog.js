@@ -66,7 +66,7 @@ const SuccessDialog = (props) => {
                                 <div className="row">
                                     <p>{variables[props.lang].tokens}</p>
                                     <p>{props.tokens
-                                        ? Number(props.tokens).toFixed(4) + ' ' + config.COIN_DENOM
+                                        ? Number(props.tokens).toFixed(4) + ' ' + config.FEE_CURRENCY
                                         : null}</p>
                                 </div>
                             </> : null
