@@ -11,7 +11,8 @@ import { config } from '../../../config';
 const SuccessDialog = (props) => {
     const handleRedirect = () => {
         if (config.EXPLORER_URL) {
-            const link = `${config.EXPLORER_URL}/transactions/${props.hash}`;
+            //const link = `${config.EXPLORER_URL}/transactions/${props.hash}`;
+            const link = `${config.EXPLORER_URL}/transaction.php?hash=${props.hash}`;
             window.open(link, '_blank');
         }
     };
@@ -33,7 +34,7 @@ const SuccessDialog = (props) => {
                     <img alt="success" src={success}/>
                     {props.name
                         ? <h1>{props.name + 'd Successfully'}</h1>
-                        : props.claimValidator && props.claimValidator !== 'none'
+                        : props.claimValidator && props.claimValidator !== 'none' && !props.proposalOpen
                             ? <h1>{variables[props.lang].claimed_success}</h1>
                             : props.proposalOpen
                                 ? <h1>{variables[props.lang].vote_success}</h1>

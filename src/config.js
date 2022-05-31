@@ -1,7 +1,7 @@
 export const config = {
     RPC_URL: 'https://rpc-chronic.zenchainlabs.io',
     REST_URL: 'https://api-chronic.zenchainlabs.io',
-    EXPLORER_URL: 'https://chronic.zenchainlabs.io',
+    EXPLORER_URL: 'https://chronic.zenscan.io',
     STAKING_URL: 'https://chronic.zenchainlabs.io/stake',
     NETWORK_NAME: 'Chronic-Token',
     NETWORK_TYPE: 'mainnet',
